@@ -368,7 +368,7 @@ Module.register("MMM-SmartWebDisplay", {
 
                 let iframe = document.getElementById("domframe" + self.uuid);
 
-                iframe.src = this.urlToDisplay;
+                iframe.src = self.urlToDisplay;
             }, this.updateInt * 60 * 1000);
         }
 
