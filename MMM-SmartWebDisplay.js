@@ -363,13 +363,17 @@ Module.register("MMM-SmartWebDisplay", {
         //set autoupdate of the DOM
         if (this.updateIntervalID === 0 && this.updateInt > 0) {
 
+            if (this.config.logDebug) {
+                Log.log("StartDisplay, start auto update " + "domframe" + this.uuid);
+            }
+
             this.updateIntervalID = setInterval(function () {
                 // self.updateDom(1000);
 
-                let iframe = document.getElementById("domframe"+this.uuid);
+                let iframe = document.getElementById("domframe" + self.uuid);
 
-                if (this.config.logDebug) {
-                    Log.log("StartDisplay, reloading ");
+                if (self.config.logDebug) {
+                    Log.log("StartDisplay, reloading " + "domframe" + self.uuid);
                 }
 
                 iframe.src += ''
