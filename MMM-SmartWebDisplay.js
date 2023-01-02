@@ -341,7 +341,7 @@ StopDisplay: function() {
         this.urlToDisplay = "";
    		this.ActualState = "STOPPED";
 
-  		this.updateDom(1000);
+  		this.updateDom(1000); // todo
 },
 
 
@@ -356,20 +356,22 @@ StartDisplay: function(direction) {
 		this.urlToDisplay = this.selectURL(direction);
 		this.ActualState = "Playing";
 
-		self.updateDom(1000);	
+		self.updateDom(1000);
 						                               
 		//set autoupdate of the DOM                            
         if(this.updateIntervalID === 0 && this.updateInt > 0){
 			this.updateIntervalID = setInterval( function () { 
-				self.updateDom(1000);
-			}, this.updateInt * 60 * 1000);    
+				// self.updateDom(1000);
+				let iframe = document.getElementById("domframe");
+				iframe.contentWindow.location.reload();
+			}, this.updateInt * 60 * 1000);
 		}
 
 		//set auto next url
         if(this.NextURLIntervalID === 0 && this.nextURLInt > 0){
 			this.NextURLIntervalID = setInterval( function () { 
 				self.urlToDisplay = self.selectURL("next");
-				self.updateDom(1000);
+				self.updateDom(1000); // todo fix multiple urls
 			}, this.nextURLInt * 60 * 1000);    
 		}
 },
@@ -381,18 +383,19 @@ getStyles: function() {
 
 // Override dom generator.
 getDom: function() {
-	
+
 	var self = this;
 
 	if(this.config.logDebug){		
 		Log.log ("update SWD DOM at : " + moment.unix(Date.now() / 1000).format('dd - HH:mm:ss')  + ", url : " + this.urlToDisplay);		
 	}
-	
+
 	var wrapper = document.createElement("div");// main Wrapper that containts the others
 	wrapper.className = "mainWrapper"; //for CSS customization
 	
 		//Init of the iFrame   
 	iframe = document.createElement("IFRAME");
+	iframe.id = "domframe";
 	iframe.width = this.config.width;
 	iframe.height = this.config.height;
 	iframe.scrolling = this.config.scrolling;
