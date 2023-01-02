@@ -362,8 +362,7 @@ StartDisplay: function(direction) {
         if(this.updateIntervalID === 0 && this.updateInt > 0){
 			this.updateIntervalID = setInterval( function () { 
 				// self.updateDom(1000);
-				let iframe = document.getElementById("domframe");
-				iframe.contentWindow.location.reload();
+				document.getElementById("domframe").src += ''
 			}, this.updateInt * 60 * 1000);
 		}
 
