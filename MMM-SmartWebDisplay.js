@@ -25,7 +25,7 @@ Module.register("MMM-SmartWebDisplay", {
         displayLastUpdateFormat: 'ddd - HH:mm:ss', //format of the date and time to display
         url: ["http://magicmirror.builders/", "https://www.youtube.com/embed/Qwc2Eq6YXTQ?autoplay=1"], //source of the URL to be displayed
         scrolling: "no", // allow scrolling or not. html 4 only
-        shutoffDelay: 10000
+        shutoffDelay: 10000,
     },
 
     start: function () {
@@ -33,6 +33,8 @@ Module.register("MMM-SmartWebDisplay", {
         Log.info("Starting module: " + this.name + " with identifier: " + this.identifier);
 
         self = this;
+
+        this.uuid = Date.now()
 
         this.ModuleiFrameHidden = false; //displayed by default
         this.updateIntervalID = 0;
@@ -360,13 +362,14 @@ Module.register("MMM-SmartWebDisplay", {
 
         //set autoupdate of the DOM
         if (this.updateIntervalID === 0 && this.updateInt > 0) {
+
             this.updateIntervalID = setInterval(function () {
                 // self.updateDom(1000);
 
-                let iframe = document.getElementById("domframe");
+                let iframe = document.getElementById("domframe"+this.uuid);
 
                 if (this.config.logDebug) {
-                    Log.log("StartDisplay, reloading iframe" + iframe);
+                    Log.log("StartDisplay, reloading ");
                 }
 
                 iframe.src += ''
@@ -401,7 +404,7 @@ Module.register("MMM-SmartWebDisplay", {
 
         //Init of the iFrame
         iframe = document.createElement("IFRAME");
-        iframe.id = "domframe";
+        iframe.id = "domframe" + this.uuid;
         iframe.width = this.config.width;
         iframe.height = this.config.height;
         iframe.scrolling = this.config.scrolling;
