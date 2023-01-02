@@ -26,6 +26,7 @@ Module.register("MMM-SmartWebDisplay", {
         url: ["http://magicmirror.builders/", "https://www.youtube.com/embed/Qwc2Eq6YXTQ?autoplay=1"], //source of the URL to be displayed
         scrolling: "no", // allow scrolling or not. html 4 only
         shutoffDelay: 10000,
+        uuid: Date.now(),
     },
 
     start: function () {
@@ -34,7 +35,6 @@ Module.register("MMM-SmartWebDisplay", {
 
         self = this;
 
-        this.uuid = Date.now()
 
         this.ModuleiFrameHidden = false; //displayed by default
         this.updateIntervalID = 0;
@@ -47,6 +47,7 @@ Module.register("MMM-SmartWebDisplay", {
         this.updateInt = this.config.updateInterval;
         this.nextURLInt = this.config.NextURLInterval;
         this.shutoffDelay = this.config.shutoffDelay;
+        this.uuid = this.config.uuid
 
         //run !!
         this.StartDisplay();
