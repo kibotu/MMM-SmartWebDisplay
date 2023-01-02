@@ -368,7 +368,12 @@ Module.register("MMM-SmartWebDisplay", {
 
                 let iframe = document.getElementById("domframe" + self.uuid);
 
-                iframe.src = self.urlToDisplay;
+                if (self.config.logDebug) {
+                    Log.log("StartDisplay, reloading " + "domframe" + self.uuid);
+                }
+
+                iframe.contentWindow.location.reload()
+
             }, this.updateInt * 60 * 1000);
         }
 
