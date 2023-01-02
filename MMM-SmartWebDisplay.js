@@ -341,7 +341,7 @@ StopDisplay: function() {
         this.urlToDisplay = "";
    		this.ActualState = "STOPPED";
 
-  		this.updateDom(1000); // todo
+  		// this.updateDom(1000); // todo
 },
 
 
@@ -356,7 +356,7 @@ StartDisplay: function(direction) {
 		this.urlToDisplay = this.selectURL(direction);
 		this.ActualState = "Playing";
 
-		self.updateDom(1000);
+		// self.updateDom(1000);
 						                               
 		//set autoupdate of the DOM                            
         if(this.updateIntervalID === 0 && this.updateInt > 0){
@@ -371,7 +371,7 @@ StartDisplay: function(direction) {
         if(this.NextURLIntervalID === 0 && this.nextURLInt > 0){
 			this.NextURLIntervalID = setInterval( function () { 
 				self.urlToDisplay = self.selectURL("next");
-				self.updateDom(1000); // todo fix multiple urls
+				// self.updateDom(1000); // todo fix multiple urls
 			}, this.nextURLInt * 60 * 1000);    
 		}
 },
